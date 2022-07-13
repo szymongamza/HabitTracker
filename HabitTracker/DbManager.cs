@@ -37,15 +37,22 @@ namespace HabitTracker
             }
         }
 
-        public void InsertRecord()
+        public void InsertRecord(string date, int quantity)
         {
             using (var connection = new SqliteConnection(_connectionString))
             {
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = "";
-                    command.ExecuteNonQuery();
+                    command.CommandText = $"INSERT INTO coffees(Date, Quantity) VALUES({date},{quantity})";
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch(SqliteException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
