@@ -10,7 +10,7 @@ namespace HabitTracker
     {
         public void InsertData(DbManager dbManager)
         {
-            Console.WriteLine("Input data as DD-MM-YYYY:");
+            Console.WriteLine("Input data as YYYY-MM-DD:");
             var date = Console.ReadLine();
             while(date == null)
             {

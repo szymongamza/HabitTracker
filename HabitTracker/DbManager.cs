@@ -21,7 +21,7 @@ namespace HabitTracker
                     command.CommandText = 
                     @"CREATE TABLE IF NOT EXISTS coffees (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Date TEXT,
+                    DateOfDay DATE,
                     Quantity INTEGER
                     )";
                     try
@@ -44,7 +44,8 @@ namespace HabitTracker
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = $"INSERT INTO coffees(Date, Quantity) VALUES({date},{quantity})";
+                    command.CommandText = $"INSERT INTO coffees(DateOfDay, Quantity) VALUES(\"{date}\",{quantity})";
+                    Console.WriteLine($"DEBUG: {date}");
                     try
                     {
                         command.ExecuteNonQuery();
