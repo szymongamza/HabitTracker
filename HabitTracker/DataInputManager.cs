@@ -10,7 +10,7 @@ namespace HabitTracker
     {
         public void InsertData(DbManager dbManager)
         {
-            Console.WriteLine("Input data as YYYY-MM-DD:");
+            Console.WriteLine("Input data as DD-MM-YYYY:");
             var date = Console.ReadLine();
             while(date == null)
             {
@@ -33,6 +33,15 @@ namespace HabitTracker
             }
             Console.WriteLine(date);
             dbManager.InsertRecord(date, quantity);
+        }
+        public void GetData(DbManager dbManager)
+        {
+            List<HabitModel> listOfHabitModel = dbManager.GetRecords();
+
+            foreach(var habitModel in listOfHabitModel)
+            {
+                Console.WriteLine($"{habitModel.Id} - {habitModel.Date} - Number of coffees: {habitModel.Quantity}");
+            }
         }
     }
 }

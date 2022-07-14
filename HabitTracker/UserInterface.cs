@@ -22,7 +22,7 @@ namespace HabitTracker
                 Console.WriteLine("Type 3 to DELETE coffee record");
                 Console.WriteLine("Type 4 to UPDATE coffee record");
                 var input = Console.ReadLine();
-                int option;
+                int option = -1;
                 while (input == null)
                 {
                     input = Console.ReadLine();
@@ -34,12 +34,16 @@ namespace HabitTracker
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    break;
                 }
                 switch(option)
                 {
                     case 0:
                         quitApp = true;
+                        break;
+                    case 1:
+                        Console.WriteLine("-------------------------------------------------------");
+                        inputManager.GetData(dbManager);
+                        Console.WriteLine("-------------------------------------------------------");
                         break;
                     case 2:
                         inputManager.InsertData(dbManager);
