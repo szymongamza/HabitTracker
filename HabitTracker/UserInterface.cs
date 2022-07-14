@@ -10,7 +10,7 @@ namespace HabitTracker
     {
         public void MainMenuLoop(DbManager dbManager)
         {
-            DataInputManager inputManager = new();
+            InputManager inputManager = new();
             Console.Clear();
             bool quitApp = false;
             while (quitApp == false)
@@ -41,12 +41,17 @@ namespace HabitTracker
                         quitApp = true;
                         break;
                     case 1:
-                        Console.WriteLine("-------------------------------------------------------");
+                        Console.Clear();
                         inputManager.GetData(dbManager);
-                        Console.WriteLine("-------------------------------------------------------");
                         break;
                     case 2:
+                        Console.Clear();
                         inputManager.InsertData(dbManager);
+                        break;                    
+                    case 3:
+                        Console.Clear();
+                        inputManager.GetData(dbManager);
+                        inputManager.DeleteData(dbManager);
                         break;
                 }
 

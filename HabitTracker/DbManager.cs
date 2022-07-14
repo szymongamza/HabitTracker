@@ -45,7 +45,6 @@ namespace HabitTracker
                 {
                     connection.Open();
                     command.CommandText = $"INSERT INTO coffees(DateOfDay, Quantity) VALUES(\"{date}\",{quantity})";
-                    Console.WriteLine($"DEBUG: {date}");
                     try
                     {
                         command.ExecuteNonQuery();
@@ -57,15 +56,24 @@ namespace HabitTracker
                 }
             }
         }
-        public void DeleteRecord()
+        public void DeleteRecord(int id)
         {
             using (var connection = new SqliteConnection(_connectionString))
             {
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = "";
-                    command.ExecuteNonQuery();
+                    command.CommandText = $"DELETE FROM coffees WHERE Id = {id}";
+                    int rowAffected = command.ExecuteNonQuery();
+                    if(rowAffected == 0)
+                    {
+                        Console.WriteLine($"There was no record with Id: {id}");
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"Id: {id} has been deleted.");
+                    }
                 }
             }
         }
@@ -87,7 +95,6 @@ namespace HabitTracker
                                 new HabitModel
                                 {
                                     Id = reader.GetInt32(0),
-
                                     Date = DateTime.Parse(reader.GetString(1)),
                                     Quantity = reader.GetInt32(2)
 

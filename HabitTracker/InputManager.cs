@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HabitTracker
 {
-    public class DataInputManager
+    public class InputManager
     {
         public void InsertData(DbManager dbManager)
         {
@@ -31,17 +31,36 @@ namespace HabitTracker
             {
                 Console.WriteLine(e.Message);
             }
-            Console.WriteLine(date);
             dbManager.InsertRecord(date, quantity);
         }
         public void GetData(DbManager dbManager)
         {
             List<HabitModel> listOfHabitModel = dbManager.GetRecords();
-
-            foreach(var habitModel in listOfHabitModel)
+            Console.WriteLine("-------------------------------------------------------");
+            foreach (var habitModel in listOfHabitModel)
             {
                 Console.WriteLine($"{habitModel.Id} - {DateOnly.FromDateTime(habitModel.Date)} - Number of coffees: {habitModel.Quantity}");
             }
+            Console.WriteLine("-------------------------------------------------------");
+        }
+        public void DeleteData(DbManager dbManager)
+        {
+            Console.WriteLine("Type in Id of the record that you want to delete.");
+            var idTemp = Console.ReadLine();
+            int id = 0;
+            while (idTemp == null)
+            {
+                idTemp = Console.ReadLine();
+            }
+            try
+            {
+                id = int.Parse(idTemp);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            dbManager.DeleteRecord(id);
         }
     }
 }
