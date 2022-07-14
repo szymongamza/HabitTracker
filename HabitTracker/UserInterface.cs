@@ -53,6 +53,15 @@ namespace HabitTracker
                         inputManager.GetData(dbManager);
                         inputManager.DeleteData(dbManager);
                         break;
+                    case 4:
+                        Console.Clear();
+                        inputManager.GetData(dbManager);
+                        inputManager.UpdateData(dbManager);
+                        break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Choose option from menu.");
+                        break;
                 }
 
             }
