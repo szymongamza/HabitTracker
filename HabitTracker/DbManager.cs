@@ -87,6 +87,7 @@ namespace HabitTracker
                                 new HabitModel
                                 {
                                     Id = reader.GetInt32(0),
+
                                     Date = DateTime.Parse(reader.GetString(1)),
                                     Quantity = reader.GetInt32(2)
 

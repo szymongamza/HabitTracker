@@ -40,7 +40,7 @@ namespace HabitTracker
 
             foreach(var habitModel in listOfHabitModel)
             {
-                Console.WriteLine($"{habitModel.Id} - {habitModel.Date} - Number of coffees: {habitModel.Quantity}");
+                Console.WriteLine($"{habitModel.Id} - {DateOnly.FromDateTime(habitModel.Date)} - Number of coffees: {habitModel.Quantity}");
             }
         }
     }
