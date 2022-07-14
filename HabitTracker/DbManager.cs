@@ -84,7 +84,7 @@ namespace HabitTracker
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = $"SELECT * FROM coffees";
+                    command.CommandText = $"SELECT * FROM coffees ORDER BY DateOfDay";
                     List<HabitModel> tableData = new();
                     SqliteDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
