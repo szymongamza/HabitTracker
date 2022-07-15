@@ -18,7 +18,7 @@ namespace HabitTracker
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = 
+                    command.CommandText =
                     @"CREATE TABLE IF NOT EXISTS coffees (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     DateOfDay DATE,
@@ -49,7 +49,7 @@ namespace HabitTracker
                     {
                         command.ExecuteNonQuery();
                     }
-                    catch(SqliteException ex)
+                    catch (SqliteException ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
@@ -65,7 +65,7 @@ namespace HabitTracker
                     connection.Open();
                     command.CommandText = $"DELETE FROM coffees WHERE Id = {id}";
                     int rowAffected = command.ExecuteNonQuery();
-                    if(rowAffected == 0)
+                    if (rowAffected == 0)
                     {
                         Console.WriteLine($"There was no record with Id: {id}");
                     }
@@ -110,15 +110,31 @@ namespace HabitTracker
             }
 
         }
-        public void UpdateRecord()
+        public void UpdateRecord(int id, string date, int quantity)
         {
             using (var connection = new SqliteConnection(_connectionString))
             {
                 using (var command = connection.CreateCommand())
                 {
                     connection.Open();
-                    command.CommandText = "";
-                    command.ExecuteNonQuery();
+                    command.CommandText = $"UPDATE coffees SET DateOfDay = \"{date}\", Quantity = {quantity} WHERE Id = {id}";
+                    try
+                    {
+                        int rowAffected = command.ExecuteNonQuery();
+                        if (rowAffected == 0)
+                        {
+                            Console.WriteLine($"There was no record with Id: {id}");
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine($"Id: {id} has been updated.");
+                        }
+                    }
+                    catch (SqliteException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }

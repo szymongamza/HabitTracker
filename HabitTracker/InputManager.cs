@@ -11,27 +11,11 @@ namespace HabitTracker
         public void InsertData(DbManager dbManager)
         {
             Console.WriteLine("Input data as DD-MM-YYYY:");
-            var date = Console.ReadLine();
-            while(date == null)
-            {
-                date = Console.ReadLine();
-            }
+            var date = DateInput();
+            string dateDisplay = date.ToString();
             Console.WriteLine("Input number of coffees:");
-            var numberOfCoffees = Console.ReadLine();
-            int quantity = 0;
-            while (numberOfCoffees == null)
-            {
-                numberOfCoffees = Console.ReadLine();
-            }
-            try
-            {
-                quantity = int.Parse(numberOfCoffees);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            dbManager.InsertRecord(date, quantity);
+            int quantity = NumberInput();
+            dbManager.InsertRecord(dateDisplay, quantity);
         }
         public void GetData(DbManager dbManager)
         {
@@ -46,39 +30,13 @@ namespace HabitTracker
         public void DeleteData(DbManager dbManager)
         {
             Console.WriteLine("Type in Id of the record that you want to delete.");
-            var idTemp = Console.ReadLine();
-            int id = 0;
-            while (idTemp == null)
-            {
-                idTemp = Console.ReadLine();
-            }
-            try
-            {
-                id = int.Parse(idTemp);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            int id = NumberInput();
             dbManager.DeleteRecord(id);
         }
         public void UpdateData(DbManager dbManager)
         {
             Console.WriteLine("Choose record you want to update by Id:");
-            var idTemp = Console.ReadLine();
-            int id = 0;
-            while (idTemp == null)
-            {
-                idTemp = Console.ReadLine();
-            }
-            try
-            {
-                id = int.Parse(idTemp);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            int id = NumberInput();
 
             Console.WriteLine("Input data as DD-MM-YYYY:");
             var date = Console.ReadLine();
@@ -88,21 +46,31 @@ namespace HabitTracker
             }
 
             Console.WriteLine("Input number of coffees:");
-            var numberOfCoffees = Console.ReadLine();
-            int quantity = 0;
-            while (numberOfCoffees == null)
-            {
-                numberOfCoffees = Console.ReadLine();
-            }
-            try
-            {
-                quantity = int.Parse(numberOfCoffees);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            int quantity = NumberInput();
             dbManager.UpdateRecord(id, date, quantity);
+        }
+        private int NumberInput()
+        {
+            var number = Console.ReadLine();
+            while (!Int32.TryParse(number, out _) || Convert.ToInt32(number) < 0)
+            {
+                Console.WriteLine("Invalid number.");
+                number = Console.ReadLine();
+            }
+            int returnNumber = Convert.ToInt32(number);
+            return returnNumber;
+        }
+        private DateOnly DateInput()
+        {
+            var input = Console.ReadLine();
+            while(!DateTime.TryParse(input, out _))
+            {
+                Console.WriteLine("Invalid date");
+                input = Console.ReadLine();
+            }
+            DateTime date = DateTime.Parse(input);
+            DateOnly dateOnly = DateOnly.FromDateTime(date);
+            return dateOnly;
         }
     }
 }
