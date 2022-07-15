@@ -10,12 +10,11 @@ namespace HabitTracker
     {
         public void InsertData(DbManager dbManager)
         {
-            Console.WriteLine("Input data as DD-MM-YYYY:");
-            var date = DateInput();
-            string dateDisplay = date.ToString();
+            Console.WriteLine("Input data as YYYY-MM-DD:");
+            string date = DateInput();
             Console.WriteLine("Input number of coffees:");
             int quantity = NumberInput();
-            dbManager.InsertRecord(dateDisplay, quantity);
+            dbManager.InsertRecord(date, quantity);
         }
         public void GetData(DbManager dbManager)
         {
@@ -23,7 +22,7 @@ namespace HabitTracker
             Console.WriteLine("-------------------------------------------------------");
             foreach (var habitModel in listOfHabitModel)
             {
-                Console.WriteLine($"{habitModel.Id} - {DateOnly.FromDateTime(habitModel.Date)} - Number of coffees: {habitModel.Quantity}");
+                Console.WriteLine($"{habitModel.Id} - {habitModel.Date} - Number of coffees: {habitModel.Quantity}");
             }
             Console.WriteLine("-------------------------------------------------------");
         }
@@ -38,13 +37,8 @@ namespace HabitTracker
             Console.WriteLine("Choose record you want to update by Id:");
             int id = NumberInput();
 
-            Console.WriteLine("Input data as DD-MM-YYYY:");
-            var date = Console.ReadLine();
-            while (date == null)
-            {
-                date = Console.ReadLine();
-            }
-
+            Console.WriteLine("Input data as YYYY-MM-DD:");
+            string date = DateInput();
             Console.WriteLine("Input number of coffees:");
             int quantity = NumberInput();
             dbManager.UpdateRecord(id, date, quantity);
@@ -60,7 +54,7 @@ namespace HabitTracker
             int returnNumber = Convert.ToInt32(number);
             return returnNumber;
         }
-        private DateOnly DateInput()
+        private string DateInput()
         {
             var input = Console.ReadLine();
             while(!DateTime.TryParse(input, out _))
@@ -70,7 +64,8 @@ namespace HabitTracker
             }
             DateTime date = DateTime.Parse(input);
             DateOnly dateOnly = DateOnly.FromDateTime(date);
-            return dateOnly;
+            string toReturn = dateOnly.ToString("yyyy-MM-dd");
+            return toReturn;
         }
     }
 }
