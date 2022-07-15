@@ -19,12 +19,12 @@ namespace HabitTracker
         public void GetData(DbManager dbManager)
         {
             List<HabitModel> listOfHabitModel = dbManager.GetRecords();
-            Console.WriteLine("-------------------------------------------------------");
+            Console.WriteLine("-----------------------------------------");
             foreach (var habitModel in listOfHabitModel)
             {
                 Console.WriteLine($"{habitModel.Id} - {habitModel.Date} - Number of coffees: {habitModel.Quantity}");
             }
-            Console.WriteLine("-------------------------------------------------------");
+            Console.WriteLine("-----------------------------------------");
         }
         public void DeleteData(DbManager dbManager)
         {

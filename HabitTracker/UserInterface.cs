@@ -15,12 +15,16 @@ namespace HabitTracker
             bool quitApp = false;
             while (quitApp == false)
             {
-                Console.WriteLine("     MAIN MENU:");
-                Console.WriteLine("Type 0 to quit app");
-                Console.WriteLine("Type 1 to VIEW all coffee records");
-                Console.WriteLine("Type 2 to INSERT coffee record");
-                Console.WriteLine("Type 3 to DELETE coffee record");
-                Console.WriteLine("Type 4 to UPDATE coffee record");
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("|               MAIN MENU               |");
+                Console.WriteLine("-----------------------------------------");
+                Console.WriteLine("|    Type 0 to quit app                 |");
+                Console.WriteLine("|    Type 1 to VIEW all coffee records  |");
+                Console.WriteLine("|    Type 2 to INSERT coffee record     |");
+                Console.WriteLine("|    Type 3 to DELETE coffee record     |");
+                Console.WriteLine("|    Type 4 to UPDATE coffee record     |");
+                Console.WriteLine("-----------------------------------------");
+
                 var input = Console.ReadLine();
                 int option = -1;
                 while (input == null)
@@ -60,7 +64,9 @@ namespace HabitTracker
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Choose option from menu.");
+                        Console.WriteLine("-----------------------------------------");
+                        Console.WriteLine("|       Choose option from menu!        |");
+                        Console.WriteLine("-----------------------------------------");
                         break;
                 }
 
